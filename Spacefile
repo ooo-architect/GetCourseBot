@@ -9,6 +9,8 @@ micros:
     public_routes:
       - "/webhook"
       - "/webhook/*"
+      - "/members"
+      - "/members/*"
 
     presets:
       env:
@@ -18,11 +20,13 @@ micros:
           description: Enable logging of errors. Logs are stored in the "logs" Deta Base.
           default: "True"
         - name: ERROR_LOGS_EXPIRE_AFTER
-          description: Time in seconds after which errors logs will be deleted. 
+          description: Time in seconds after which errors logs will be deleted.
           default: "604800"
         - name: ENABLE_EVENTS_LOGS
           description: Enable logging of each telegram event. Logs are stored in the "logs" Deta Base.
           default: "True"
         - name: EVENTS_LOGS_EXPIRE_AFTER
-          description: Time in seconds after which events logs will be deleted. 
+          description: Time in seconds after which events logs will be deleted.
           default: "604800"
+        - name: BOT_LINK
+          description: Link to your bot. Used in the /start command.
