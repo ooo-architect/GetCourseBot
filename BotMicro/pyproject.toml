@@ -6,11 +6,11 @@ authors = ["mamsdeveloper <butvin.mihail@yandex.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-aiogram-deta = { git = "https://github.com/mamsdeveloper/deta.git", branch = "main" }
-aiogram = "^3.0.0b1"
-uvicorn = "^0.21.1"
-odetam = "^1.5.0"
+python = "~3.9"
+aiogram-deta = { git = "https://github.com/mamsdeveloper/deta.git", branch = "getcoursebot-freeze" }
+aiogram = "3.0.0b6"
+uvicorn = "0.21.1"
+odetam = "1.5.0"
 
 [tool.poetry.group.dev.dependencies]
 autopep8 = "^2.0.2"
