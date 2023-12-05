@@ -1,7 +1,6 @@
 from os import getenv
 
 from aiogram import Bot, Dispatcher
-from aiogram.utils.callback_answer import CallbackAnswerMiddleware
 from aiogram_deta.storage import DefaultKeyBuilder, DetaStorage
 from deta import Deta
 
@@ -22,7 +21,6 @@ def create_dispatcher(deta: Deta) -> Dispatcher:
     dispatcher = Dispatcher(storage=storage)
 
     dispatcher.include_router(root_router)
-    dispatcher.callback_query.middleware(CallbackAnswerMiddleware())
 
     if parse_bool(getenv('ENABLE_EVENTS_LOGS', 'false')):
         expire_after = parse_optional_int(getenv('EVENTS_LOGS_EXPIRE_AFTER', ''))
