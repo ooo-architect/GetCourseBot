@@ -26,21 +26,29 @@ async def update_account_groups(
     if account is None:
         return None
 
+    # Get groups from GetCourse
     groups = await get_groups(account_key, api_key)
 
-    existed_groups = await Group.query(
-        DetaQueryList([
-            Group.gid == group.id
-            for group in groups
-        ])  # type: ignore
-    )
+    # Get already configured groups from DB
+    if groups:
+        existed_groups = await Group.query(
+            DetaQueryList([
+                Group.gid == group.id
+                for group in groups
+            ])  # type: ignore
+        )
+    else:
+        existed_groups = []
+
     existed_gids = [group.gid for group in existed_groups]
+    # Create new blank groups
     new_groups = [
         Group(key=group.id, gid=group.id, name=group.name)
         for group in groups if group.id not in existed_gids
     ]
-    all_groups = existed_groups + new_groups
 
+    # Save all (actually, can save only new)
+    all_groups = existed_groups + new_groups
     created_groups: list[Group] = await Group.put_many(all_groups)
     account.groups = [group.key for group in created_groups]
     await account.save()  # type: ignore
